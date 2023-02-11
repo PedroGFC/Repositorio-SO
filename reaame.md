@@ -1,3 +1,6 @@
 # Repositório Git
 
-Repositório oficial da faculdade
+Repositório oficial do grupo:
+- Alcir
+- Felipe
+- Pedro
