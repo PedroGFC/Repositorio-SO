@@ -2,6 +2,6 @@
 
 Repositório oficial do grupo:
 - Alcir 
-- Felipe 
-- Pedro
+- Felipe Nakandakari
+- Pedro Catarino
 
