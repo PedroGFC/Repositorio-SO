@@ -1,3 +1,7 @@
+//Pedro Catarino - 42105951
+//Daniel Kabadayan - 42110637
+//Felipe Nakandakari - 42104701
+
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <malloc.h>
@@ -11,6 +15,7 @@
 // 64kB stack
 #define FIBER_STACK 1024*64
 
+//Criação da estrutura conta, que contém um saldo do tipo inteiro. 
 struct c {
     int saldo;
 };
@@ -19,9 +24,9 @@ typedef struct c conta;
 conta from, to;
 int valor;
 
-pthread_mutex_t mutex; // Mutex para exclusão mútua
+pthread_mutex_t mutex; // mutex que resolverá a exclusão mútua durante as tranferências
 
-// Função para transferência segura usando mutex
+// Função para transferência segura usando mutex. Essa função serve para bloquear o acesso de outras threads, quando a trasferência estiver em andamento.
 void transferencia_segura()
 {
     if (from.saldo >= valor)
@@ -35,10 +40,10 @@ void transferencia_segura()
     }
 }
 
-// Função de thread para transferência
+// Função de entrada das threads que realizam a tranferência
 void *transferencia_thread(void *arg)
 {
-    transferencia_segura(); // Chama a função de transferência segura
+    transferencia_segura(); // Chama a função transferência_segura que bloqueia e libera os mutexes
 
     printf("Transferência concluída com sucesso!\n");
     printf("Saldo de c1: %d\n", from.saldo);
@@ -47,6 +52,7 @@ void *transferencia_thread(void *arg)
     return NULL;
 }
 
+//Função main
 int main()
 {
     void *stack;
@@ -56,7 +62,7 @@ int main()
     // Inicializa o mutex
     pthread_mutex_init(&mutex, NULL);
 
-    // Allocate the stack
+    // Usa malloc para alocar a pilha de threads
     stack = malloc(FIBER_STACK);
     if (stack == 0)
     {
@@ -64,14 +70,14 @@ int main()
         exit(1);
     }
 
-    // Todas as contas começam com saldo 100
+    // Define como 100 os saldos iniciais das contas
     from.saldo = 100;
     to.saldo = 100;
 
     printf("Transferindo 10 para a conta c2\n");
     valor = 10;
 
-    pthread_t threads[100]; // Array para armazenar as threads
+    pthread_t threads[100]; // Array de threads para armazenar as transferências
 
     for (i = 0; i < 10; i++)
     {
@@ -93,7 +99,7 @@ int main()
         }
     }
 
-    // Free the stack
+    // Libera memória alocada
     free(stack);
 
     // Destroi o mutex
