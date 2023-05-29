@@ -1,5 +1,9 @@
 Projeto final - SO
 
+Pedro Catarino - 42105951
+Daniel Kabadayan - 42110637
+Felipe Nakandakari - 42104701
+
 
 O uso de mutex nesse programa ajuda a resolver o problema da condição de corrida ao garantir que apenas uma thread possa acessar a seção crítica do código por vez. 
 Nesse código a seçaõ crítica é a transferência de uma conta para outra. Sem o mutex, várias threads poderiam acessar e modificar as contas ao mesmo tempo, assim levando 
