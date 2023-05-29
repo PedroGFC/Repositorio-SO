@@ -1,1 +1,9 @@
-Teste Readme
+Projeto final - SO
+
+
+O uso de mutex nesse programa ajuda a resolver o problema da condição de corrida ao garantir que apenas uma thread possa acessar a seção crítica do código por vez. 
+Nesse código a seçaõ crítica é a transferência de uma conta para outra. Sem o mutex, várias threads poderiam acessar e modificar as contas ao mesmo tempo, assim levando 
+a resultados impressísos. Já com o mutex, o código garante que apenas uma thread por vez possa realizar a transferência, assim, quando uma thread adquire um mutex, ela bloqueia
+o acesso das outras que tentem o adquirir. Somente quando a thread libera o mutex é que as outras podem adquiri-lo e realizar outra transferência.
+
+Portando, o uso do mutex garante que a transferência ocorra de forma segura e evita a condição de corrida, garantindo que os saldos da conta sejam atualizados de forma correta.
